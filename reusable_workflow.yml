@@ -1,0 +1,23 @@
+# common-workflows/.github/workflows/build.yml
+
+name: 1_Non-Prod Build & Deploy
+run-name: Build initiated by ${{ github.actor }} for branch ${{ inputs.branch }}
+
+on:
+  repository_dispatch:
+    types: [build]
+
+env:
+  # ... (your existing environment variables)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.client_payload.branch }}
+      
+      # ... (rest of your steps)
